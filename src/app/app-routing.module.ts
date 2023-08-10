@@ -6,9 +6,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'Experiments/:id', component: ExperimentsComponent },
-  { path: 'Model', component: ModelsComponent },
-  { path: '', redirectTo: '/Experiments/0', pathMatch: 'full' },
+  { path: 'experiments/:id', component: ExperimentsComponent },
+  { path: 'experiments', component: ExperimentsComponent },
+  { path: 'models', component: ModelsComponent },
+  { path: '', redirectTo: '/experiments/0', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

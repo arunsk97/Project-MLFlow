@@ -1,4 +1,18 @@
-<div style="display: flex;">
-
+<div class="headerClass">
+    <div class="subHeader">
+        <div>
+            <img style="height: 40px; "
+                src="https://adminerp9g-server.ostack.babyrocket.net/static-files/static/media/home-logo.b14e3dd7dc63ea1769c6.png" />
+            <span style="vertical-align: bottom; font-size: 11px;">2.1.0</span>
+        </div>
+        <div class="links">
+            <a class="linkClass" routerLink="/experiments" routerLinkActive="active-link">Experiments</a>
+            <a class="linkClass" routerLink="/models" routerLinkActive="active-link">Models</a>
+        </div>
+    </div>
+    <div class="externalLinks">
+        <a class="linkClass" target="_blank" href="https://github.com/mlflow/mlflow">GitHub</a>
+        <a class="linkClass" target="_blank" href="https://www.mlflow.org/docs/latest/index.html">Docs</a>
+    </div>
 </div>
 <router-outlet></router-outlet>
