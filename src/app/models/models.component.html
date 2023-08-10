@@ -1,0 +1,58 @@
+
+<div style="display: flex; padding: 1rem 1rem; flex: 1 1 0%">
+    <div style="width:100%; flex-grow: 1;">
+       <div>
+            <h2 style="    font-size: 22px;
+            line-height: 28px;
+            font-weight: 600;">Registered Models</h2>
+       </div> 
+       <div class="alert alert-secondary" role="alert">
+            <i class="fa fa-info-circle" style="padding: 0 .5rem;" aria-hidden="true"></i>
+            Share and manage machine learning models. 
+            <a target="_blank" style="cursor: pointer;" href="https://www.mlflow.org/docs/latest/tracking.html">Learn more</a>
+            <div style="float: right; cursor: pointer;" ><span>X</span></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <div style="gap: 8px; align-items: center;display:inline-flex">
+                <div>
+                    <button class="shareButton">Create Model</button>
+                </div>
+            </div>
+            <div style="display: flex;gap:8px">
+                <div style="display:flex;justify-content:  flex-end; align-items: center;">
+                    <i style="font-size: 16px;" class="fas fa-question-circle"></i>
+                </div>
+                <div style="border: 1px solid #7d7c7c77 ; border-radius: 3px; align-items: center;display: flex">
+                    <i title="" style="padding-left: 6px; padding-right: 5px" class="fa fa-search" aria-hidden="true"></i>
+                    <input id="gridFilterInput" placeholder="Search by model names or tags" style="width:480px; border: none; outline: none;padding:.2rem !important" />
+                </div>
+                <div>
+                    <button style="border: 1px solid #7d7c7c77 ; font-size: 13px;" class="btn">Search</button>
+                </div>
+                <div style="margin-left: 8px;">
+                    <button style="border: 1px solid #7d7c7c77 ;font-size: 13px;" class="btn">Cancel</button>
+                </div>
+            </div>
+            
+        </div>
+        <div>
+            <nz-table >
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Latest Version</th>
+                    <th>Staging</th>
+                    <th>Production</th>
+                    <th>Last Modified</th>
+                    <th>Tags</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  </tr>
+                </tbody>
+            </nz-table>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,166 @@
+<div *ngIf="!loading">
+    <div class="heightClass"></div>
+    <div class="lnavClass2">
+        <div>
+            <div class="mainHeader">
+                <div *ngIf="selectedIds.length <= 1; else optionalHeader" style="display: flex; align-items: center;">
+                    <h2 id="experimentHeader" style="margin-right: 12px;" class="mainHeaderClass">{{experimentObj.title}}</h2>
+                    <a (click)="copyText('experimentHeader')" style="cursor: pointer;"><i id="copyIcon" class="fa-regular fa-copy"></i></a>
+                </div>
+                <ng-template #optionalHeader>
+                    <div style="display: flex; align-items: center;">
+                        <h2 id="experimentHeader" class="mainHeaderClass">Displaying Runs from {{selectedIds.length}} Experiments</h2>
+                    </div>
+                </ng-template>
+                <div *ngIf="success" style="width: fit-content !important;" role="alert">
+                    <span><strong><em>"Copied"</em></strong></span>
+                </div>
+                <div style="margin-left: 8px;">
+                    <div style="gap: 8px; align-items: center;display:inline-flex">
+                        <div>
+                            <button class="shareButton" (click)="onShare()">Share</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="heightClass"></div>
+            <div *ngIf="notes" class="alert alert-secondary" role="alert">
+                <i class="fa fa-info-circle" style="padding: 0 .5rem;" aria-hidden="true"></i>
+                Track machine learning training runs in experiments. 
+                <a target="_blank" style="cursor: pointer;" href="https://www.mlflow.org/docs/latest/tracking.html">Learn more</a>
+                <div style="float: right; cursor: pointer;" (click)="removeInfo()"><span>X</span></div>
+            </div>
+            <div *ngIf="selectedIds.length <= 1">
+                <div class="heightClass"></div>
+                <div style="display: flex; gap: 24px;">
+                    <span class="spanClass">Experiment ID: {{experimentObj.Id}}</span>
+                    <span class="spanClass">Artifact Location: {{experimentObj.location}}</span>
+                </div>
+                <div class="heightClass"></div>
+                <div class="accordion" id="accordionDropDown" style="display:flex; align-items: center;"> 
+                    <button class="collapsebuttonClass accordion-button collapsed" style="font-size: 13px;" role="button" data-bs-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                    </button>
+                    <div style="display: flex; align-items: center;">
+                        <span style="font-size: 16px;" class="accordion-header">Description</span>
+                        <div (click)="onNotesEdit()">
+                            <a style="float: left;margin-left:5px; color:#2374bb">
+                                <span>Edit</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionDropDown">
+                    <div class="accordion-body" [innerHTML]="experimentObj.description">
+                    </div>
+                </div>
+                <div *ngIf="ckeditorShown">
+                    <ckeditor [editor]="editor" data="{{experimentObj.description}}" [(ngModel)]="editedNotes"></ckeditor>
+                    <div class="heightClass"></div>
+                    <div style="display:flex; gap:12px">
+                        <button class="btn btn-primary" (click)="onNotesSave()">Save</button>
+                        <button class="btn" (click)="onNotesEdit()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="errorMsg.length > 0" class="alert alert-danger" role="alert">
+                <span>{{errorMsg}}</span>
+                <div style="float: right; cursor: pointer;" (click)="errorMsg = ''"><span>X</span></div>
+            </div>
+            <div class="heightClass"></div>
+            <div style="display: flex; align-items: start;" >
+                <div style="width:85% ; display: flex; gap: 8px; flex-wrap: wrap;">
+                  <div style="border: 1px solid #615757ca ; border-radius: 3px; align-items: center;display: flex">
+                    <i style="padding-left: 6px; padding-right: 5px" class="fa fa-search" aria-hidden="true"></i>
+                    <input id="gridFilterInput" [(ngModel)]="gridFilter" (keydown)="onAgGridFilter($event)" placeholder="metrics.rmse < 1 and params.model = 'tree'" style="width:480px; border: none; outline: none;" />
+                    <i class="fa fa-info-circle" style="padding: 0 .5rem;" 
+                    title="{{filterHoverText}}" aria-hidden="true"></i>
+                  </div>
+                <div class="dropdown">
+                    <button style="border: 1px solid #000;font-size: 13px !important;" class="btn" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i *ngIf="sortOrder == 'asc'" class="fa-solid fa-arrow-up-short-wide"></i>
+                        <i *ngIf="sortOrder == 'desc'" class="fa-solid fa-arrow-down-short-wide"></i>
+                        <span> Sort:</span>
+                        <span> {{sortValue}}</span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="max-height: 40vh; overflow-y: scroll;">
+                        <div *ngFor="let sortKey of sortKeys()"> <!-- sortKeys()-->
+                            <li style="padding: .3rem .3rem;"><a class="dropdown-item" (click)="onSelect('sort', sortKey, 'asc')"><i class="fa fa-arrow-up" aria-hidden="true"></i> {{sortKey}}</a></li>
+                            <li style="padding: .3rem .3rem;"><a class="dropdown-item" (click)="onSelect('sort', sortKey, 'desc')"><i class="fa fa-arrow-down" aria-hidden="true"></i> {{sortKey}}</a></li>
+                        </div>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button style="border: 1px solid #000;font-size: 13px !important;" class="btn" type="button" data-bs-toggle="dropdown">
+                        <i class="fa fa-list" aria-hidden="true"></i>
+                        <span> Columns</span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="max-height: 40vh;overflow-y: scroll;">
+                        <li style="list-style: none;">
+                            <ul *ngFor="let key of uniqueKeys" class="dropdown-item columnDrop"> <!--uniqueKeys-->
+                                <!-- <input type="checkbox" [(ngModel)]="isAllChecked[key]" (change)="toggleAllOption(key)"> -->
+                                <strong>{{key == 'tags' ? 'Attributes' : key == 'metrics' ? 'Metrics': 'Parameters'}}</strong><br />
+                                <div *ngFor="let option of columnKeys(key)">
+                                    <li *ngIf="option.headerName && option.field != 'run_name' && option.field != 'created'" style="list-style: none;" ><!--columnKeys(key)-->
+                                        <label style="padding: .5rem .75rem">
+                                            <input type="checkbox" [(ngModel)]="!option.hide" (change)="toggleOption(key, option.field)"> <!--  [(ngModel)]="selectedOptions" (change)="toggleOption(option)" -->
+                                            {{ option.headerName }} <!--option.headerName -->
+                                        </label>
+                                    </li>
+                                </div>
+                            </ul>
+                        </li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <div style="width:15%;display: flex; gap: 8px">
+                    <div class="dropdown">
+                        <button class="btn" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                        </button>
+                        
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                        <li (click)="onBtnExport()"><a class="dropdown-item">Download CSV</a></li>
+                      </ul>
+                    </div>
+                    <button class="btn" style="border: 1px solid #5e5e5ede; min-width:101px !important;font-size: 13px !important;" (click)="getExperimentbyId(selectedIds)">
+                        <i style="margin-right: 8px;" class="fa fa-refresh" aria-hidden="true"></i> Refresh
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div style="display: flex; gap: 8px">
+                <div class="dropdown">
+                    <button style="border: 1px solid #000;font-size: 13px !important;" class="btn" type="button" id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span> Time Created:</span>
+                        <span> {{timeCreated}}</span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton4">
+                      <li><a class="dropdown-item" (click)="onSelect('TimeCre','All Time')">All Time</a></li>
+                      <li><a class="dropdown-item" (click)="onSelect('TimeCre','Last hour')">Last hour</a></li>
+                      <li><a class="dropdown-item" (click)="onSelect('TimeCre','Last 24 hours')">Last 24 hours</a></li>
+                      <li><a class="dropdown-item" (click)="onSelect('TimeCre','Last 7 days')">Last 7 days</a></li>
+                      <li><a class="dropdown-item" (click)="onSelect('TimeCre','Last 30 days')">Last 30 days</a></li>
+                      <li><a class="dropdown-item" (click)="onSelect('TimeCre','Last year')">Last year</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button style="border: 1px solid #000;font-size: 13px !important;" class="btn" type="button" id="dropdownMenuButton5" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span> State:</span>
+                        <span> {{stateValue}}</span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton5">
+                      <li><a class="dropdown-item" (click)="onSelect('state','Active')">Active</a></li>
+                      <li><a class="dropdown-item" (click)="onSelect('state','Deleted')">Deleted</a></li>
+                    </ul>
+                </div>
+                <div style="flex: 1 1 0%"></div>
+                <span>showing {{rowData.length}} matching runs</span>
+            </div>
+            <div class="heightClass"></div>
+            <ag-grid-angular #agGrid (gridReady)="onGridReady($event)" *ngIf="rowData.length > 0" style="width: 100%; height: 350px;"
+            class="ag-theme-alpine"
+            [gridOptions]="gridOptions"></ag-grid-angular>
+        </div>
+    </div>
+</div>

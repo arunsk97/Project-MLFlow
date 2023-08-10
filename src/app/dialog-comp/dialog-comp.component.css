@@ -1,0 +1,162 @@
+.dialogComp{
+    background-color: rgba(0, 0, 0, 0.45);
+        bottom: 0;
+        height: 100%;
+        left: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 1000;
+}
+.dialogDiv{
+    -webkit-overflow-scrolling: touch;
+        bottom: 0;
+        left: 0;
+        outline: 0;
+        overflow: auto;
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 1000;
+        text-align: center;
+}
+.dialogWrap{
+    display: inline-block;
+    text-align: left;
+    top: 0;
+    vertical-align: middle;
+    width: 540px;
+    transform-origin: -117px 299.5px;
+}
+.dialogContent{
+    max-height: 90vh;
+                overflow: hidden;
+                padding-bottom: 24px;
+                display: flex;
+                flex-direction: column;    animation-duration: 0s !important;
+    transition: none 0s ease 0s !important;background-clip: padding-box;
+    background-color: #fff;
+    border: 0;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px -4px rgba(0,0,0,.12), 0 6px 16px 0 rgba(0,0,0,.08), 0 9px 28px 8px rgba(0,0,0,.05);
+    pointer-events: auto;
+    position: relative;
+}
+.dialogHeaderWrapper{
+    padding: 16px 16px 16px 24px;
+    background: #fff;
+    border-bottom: 0 solid #f0f0f0;
+    border-radius: 4px 4px 0 0;
+    color: #1f272d;
+}
+.dialogHeader{
+    animation-duration: 0s !important;
+                    transition: none 0s ease 0s !important;font-size: 22px;
+    line-height: 28px;
+    font-weight: 600;
+    padding-right: 24px;
+    min-height: 32px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;word-wrap: break-word;
+    color: rgba(0,0,0,.85);margin: 0;
+}
+.closeButton{
+    animation-duration: 0s !important;
+    transition: none 0s ease 0s !important;
+    height: 32px;
+    width: 32px;
+    margin: 16px 16px 0px 0px;
+    border-radius: 4px;
+    background-color: rgba(4, 53, 93, 0);
+    border-color: rgba(4, 53, 93, 0);
+    color: rgb(31, 39, 45);
+    background: transparent;
+    border: 0;
+    color: #5d7283;
+    cursor: pointer;
+    font-weight: 700;
+    line-height: 1;
+    outline: 0;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    text-decoration: none;
+    top: 0;
+    transition: color .3s;
+    z-index: 10;
+}
+.modalBody{
+    overflow-y: auto;
+    max-height: calc(((90vh - 64px) - 52px) - 24px);
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background: linear-gradient(white 30%, rgba(255, 255, 255, 0)) center top / 100% 40px no-repeat local, linear-gradient(rgba(255, 255, 255, 0), white 70%) center bottom / 100% 40px local, radial-gradient(farthest-side at 50% 0px, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) center top / 100% 14px scroll, radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0)) center bottom / 100% 14px scroll;
+    background-repeat: no-repeat;
+    word-wrap: break-word;
+    font-size: 13px;
+    line-height: 20px;
+}
+.formClass{
+    font-feature-settings: "tnum","tnum";
+    box-sizing: border-box;
+    color: #1f272d;
+    font-size: 13px;
+    font-variant: tabular-nums;
+    line-height: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.inputLabelDialog{
+    font-weight: 600;
+    line-height: 20px;
+    padding: 0 0 8px;
+    text-align: left;
+    white-space: normal;
+    display: inline-block;
+    flex-grow: 0;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.formcolClass{
+    max-width: 100%;
+    min-height: 1px;
+    position: relative;
+}
+.inputDialog{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.innerDiv{
+    align-items: center;
+    display: flex;
+    min-height: 32px;
+    position: relative;
+}
+.modalFooter{
+    height: 52px;
+    padding-top: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
+    margin-top: auto;
+    background: transparent;
+    border-radius: 0 0 4px 4px;
+    border-top: 0 solid #f0f0f0;
+    padding: 0;
+    text-align: right;
+}
+.saveButton{
+    background: #2272b4;
+    background-color: rgb(34, 114, 180);
+    border-color: transparent;
+    color: rgb(255, 255, 255) ;
+    text-shadow: none;
+    padding: 4px 12px;
+    line-height: 20px !important;
+    box-shadow: none !important;
+    height: 32px !important;
+}
