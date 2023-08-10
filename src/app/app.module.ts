@@ -14,7 +14,6 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { FormsModule } from '@angular/forms';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { LnavComponent } from './experiments/lnav/lnav.component';
 import { ExperimentDetailsComponent } from './experiments/experiment-details/experiment-details.component';
 import { ImageRendererComponent } from './image-renderer/image-renderer.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
@@ -25,7 +24,6 @@ import { NzTableModule } from 'ng-zorro-antd/table';
     ModelsComponent,
     DialogCompComponent,
     PageNotFoundComponent,
-    LnavComponent,
     ExperimentDetailsComponent,
     ImageRendererComponent
   ],

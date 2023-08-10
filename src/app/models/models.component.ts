@@ -15,7 +15,11 @@ interface modelData{
 })
 export class ModelsComponent {
   public tableData:any = [];
-
+  public gridData:any;
+  public gridFilter:any = '';
+  public isFiltered: boolean = false;
+  public documentation: boolean = true;
+ 
   constructor(private modelSvc: ModelsServiveService, public dialog: MatDialog){}
 
   loadData(){
@@ -36,9 +40,14 @@ export class ModelsComponent {
         })
         
       });
-      //this.tableData = res["registered_models"];
+      this.gridData = this.tableData;
     });
   }
+
+  onClose(){
+    this.documentation = !this.documentation;
+  }
+
   onCreate(){
     let dialogRef = this.dialog.open(DialogCompComponent, {
       width: '250px',
@@ -47,6 +56,17 @@ export class ModelsComponent {
     dialogRef.afterClosed().subscribe(result => {
       if(result == 'success') this.loadData();
     });
+  }
+
+  onSearch(){
+    this.tableData = this.gridData.filter((x:any)=> x.name.toLowerCase().includes(this.gridFilter.toLowerCase()));
+    this.isFiltered = true;
+  }
+
+  onClear(){
+    this.gridFilter = '';
+    this.tableData = this.gridData;
+    this.isFiltered = false;
   }
 
   lastDate(data:any){
