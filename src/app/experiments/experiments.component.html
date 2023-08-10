@@ -1,0 +1,66 @@
+
+<div style="height: calc(100% - 60px); display: flex; width:100%">
+  <div *ngIf="lnavShown; else elseBlock">
+    <div class="heightClass"></div>
+    <div class="lnavClass1">
+      <div>
+        <div class="experimentsHeadingClass">
+            <h2 class="lnavHeaderClass">Experiments</h2>
+            <div style="display: flex; gap:5px">
+                <div (click)="onCreate()">
+                    <span role="img" title="New Experiment" class="svgClass fontClass">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.25 11.5V8.75H4.5v-1.5h2.75V4.5h1.5v2.75h2.75v1.5H8.75v2.75h-1.5z" fill="currentColor"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z" fill="currentColor"></path>
+                        </svg>
+                    </span>
+                </div>
+                <div (click)="lnavHide()">
+                    <span role="img" title="Hide experiment list" class="svgClass fontClass" >
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(90deg);">
+                            <path d="M8 10a.75.75 0 01-.59-.286l-2.164-2.75a.75.75 0 01.589-1.214h4.33a.75.75 0 01.59 1.214l-2.166 2.75A.75.75 0 018 10z" fill="currentColor"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.75 1a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h12.5a.75.75 0 00.75-.75V1.75a.75.75 0 00-.75-.75H1.75zm.75 12.5v-11h11v11h-11z" fill="currentColor"></path>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <input autocomplete="off" placeholder="Search Experiments" [(ngModel)]="expFilter" (ngModelChange)="onExpFilter()" class="inputClass" type="text">
+      </div>
+      <div style="overflow: hidden scroll;
+            width: 100%;
+            height: 90vh;
+            margin-top: 8px;">
+        <table class="table table-borderless">
+            <tr *ngFor="let experiment of experiments">
+                <td style="cursor: pointer;">
+                    <input [(ngModel)]="experiment.selected" (ngModelChange)="onExpSelect()" type="checkbox"/>
+                </td>
+                <td style="cursor: pointer;"><a (click)="onExpNameSelect(experiment.experiment_id)" style="color:#2374bb">{{experiment.name}}</a></td> <!--experiment.experiment_id & experiment.name-->
+                <td style="cursor: pointer;"><i (click)="onEdit(experiment)" class="fa fa-pencil" style="color:#2374bb" aria-hidden="true"></i></td>
+                <td style="cursor: pointer;"><i (click)="onDelete(experiment)" class="fa fa-trash" style="color:#2374bb" aria-hidden="true"></i></td>
+            </tr>
+        </table>
+    </div>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <div>
+        <div class="heightClass"></div>
+        <div>
+            <div class="experimentsHeadingClass">
+                <div (click)="lnavHide()">
+                    <span role="img" title="Hide experiment list" class="svgClass fontClass">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: rotate(270deg);">
+                            <path d="M8 10a.75.75 0 01-.59-.286l-2.164-2.75a.75.75 0 01.589-1.214h4.33a.75.75 0 01.59 1.214l-2.166 2.75A.75.75 0 018 10z" fill="currentColor"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1.75 1a.75.75 0 00-.75.75v12.5c0 .414.336.75.75.75h12.5a.75.75 0 00.75-.75V1.75a.75.75 0 00-.75-.75H1.75zm.75 12.5v-11h11v11h-11z" fill="currentColor"></path>
+                        </svg>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+  </ng-template>
+  <div class="contentSpace"><app-experiment-details *ngIf="enableDetails" [id]="routeId"></app-experiment-details></div>
+  
+</div>

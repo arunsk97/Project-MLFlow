@@ -1,0 +1,144 @@
+.heightClass{
+    height: 16px
+}
+.lnavClass1{
+    box-sizing: border-box;
+    margin-left: 24px;
+    
+}
+.experimentsHeadingClass{
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;
+}
+.lnavHeaderClass{
+    color: rgb(31, 39, 45);margin: 0px;font-size: 22px;
+    line-height: 28px;
+    font-weight: 600;overflow-wrap: break-word;    box-sizing: border-box;
+}
+.svgClass{
+    cursor: pointer;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: inherit;
+    display: inline-block;
+    font-style: normal;
+    line-height: 0;
+    text-align: center;
+    text-transform: none;
+    vertical-align: -0.125em;
+}
+.fontClass{
+    font-size: 24px;
+}
+.inputClass{
+    line-height: 20px !important;
+    min-height: 32px !important;text-overflow: ellipsis;touch-action: manipulation;animation-duration: 0s !important;
+    transition: none 0s ease 0s !important;
+    font-feature-settings: "tnum","tnum";
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #cddae5;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #1f272d;
+    display: inline-block;
+    font-size: 13px;
+    font-variant: tabular-nums;
+    line-height: 20px;
+    list-style: none;
+    margin: 0;
+    min-width: 0;
+    padding: 5px 12px;
+    position: relative;
+    transition: all .3s;
+    width: 100%;
+}
+
+.contentSpace{
+    padding-left: 16px;
+    padding-right: 16px;
+    flex: 1 1 0%;
+}
+.lnavClass2{
+    width: 100%;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    padding-bottom: 24px;
+}
+.tableClass{
+    animation-duration: 0s !important;
+    transition: none 0s ease 0s !important;
+    font-feature-settings: "tnum","tnum";
+    background: #fff;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #1f272d;
+    font-size: 13px;
+    font-variant: tabular-nums;
+    line-height: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    transition: background-color .3s;
+}
+.mainHeader{
+    display: flex;
+    align-items: flex-start;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+.mainHeaderClass{
+    color: rgb(31, 39, 45);
+    font-size: 22px;
+    line-height: 28px;
+    font-weight: 600;
+    margin-top: 2px;
+    margin-bottom: 0px !important;
+    overflow-wrap: break-word;
+}
+.shareButton{
+    background-color: rgb(34, 114, 180) !important;
+    border-color: transparent !important;
+    color: rgb(255, 255, 255) !important;
+    text-shadow: none !important;
+    padding: 4px 12px !important;
+    line-height: 20px !important;
+    box-shadow: none !important;
+    height: 32px !important;
+    border: 1px solid #cddae5;
+    border-radius: 4px;
+    box-shadow: 0 2px 0 rgba(0,0,0,.015);
+    color: #1f272d;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 400;
+    height: 40px;
+    line-height: 20px;
+    padding: 0 16px;
+    position: relative;
+    text-align: center;
+    touch-action: manipulation;
+    transition: all .3s cubic-bezier(.645,.045,.355,1);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    white-space: nowrap;
+}
+.spanClass{
+    font-size: 13px;
+    line-height: 20px;
+    color: rgb(93, 114, 131);
+    overflow-wrap: break-word;
+}
+.collapsebuttonClass{
+    float: left;
+    width: fit-content !important;
+    justify-content: center;
+    align-items: center;
+    height: 33px;
+}
+.columnDrop:hover,:active{
+    background-color: #fff !important;
+    color: #1f272d !important;
+}

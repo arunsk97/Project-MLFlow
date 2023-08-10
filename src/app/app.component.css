@@ -1,0 +1,61 @@
+.logo {
+    height: 40px;
+    margin-bottom: 10px;
+    margin-left: 24px;
+    margin-top: 10px;
+}
+
+.version {
+    font-size: 12px;
+    margin-bottom: 13px;
+    margin-left: 5px
+}
+
+.headerClass {
+    background-color: #0b3574;
+    color: #e7f1fb;
+    height: 60px;
+}
+
+.logoDiv {
+    align-items: flex-end;
+    display: flex;
+    float: left;
+    height: 60px;
+}
+
+.routes {
+    float: left;
+    margin-left: 24px;
+    display: flex;
+    font-size: 16px;
+    padding-top: 20px;
+}
+
+.routeLinks {
+    margin-right: 24px;
+    height: 40px;
+    color: #2374bb;
+    text-decoration: none;
+}
+
+.routeText {
+    color: #e7f1fb
+}
+
+.externalLinks {
+    display: flex;
+    font-size: 16px;
+    padding-top: 20px;
+    float: right;
+    text-decoration: none;
+}
+
+.marginClass {
+    margin-right: 24px;
+    text-decoration: none;
+}
+.active-link {
+    font-weight: bold;
+    border-bottom: 4px solid rgb(67, 201, 237);
+  }
