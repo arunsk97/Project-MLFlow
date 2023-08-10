@@ -557,10 +557,10 @@ export class ExperimentsComponent {
         id = params['id'];
         // Use the 'id' parameter in your component
       });
-      if(id == 0){
+      if(id == undefined || id == 0){
         this.experiments[0].selected = true;
         this.selectedIds = [this.experiments[0].experiment_id];
-        this.router.navigate(['/Experiments', this.experiments[0].experiment_id]);
+        this.router.navigate(['/experiments', this.experiments[0].experiment_id]);
         this.routeId = this.experiments[0].experiment_id;
       }else{
         let ind = this.experiments.findIndex((x:any)=> x.experiment_id == id);
