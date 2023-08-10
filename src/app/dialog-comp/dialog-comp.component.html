@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                           </form>
-                          <form *ngIf="data.type != 'Delete' && data.type != 'createExp'" class="formClass">
+                          <form *ngIf="data.type == 'Edit' || data.type == 'Share'" class="formClass">
                             <div style="row-gap: 0; flex-direction: column;">
                                 <div *ngIf="data.type == 'Edit'" class="formcolClass inputLabelDialog">
                                     <label>Rename Experiment</label>
@@ -56,6 +56,29 @@
                                 </div>
                             </div>
                           </form>
+                          <form *ngIf="data.type == 'createModel'" class="formClass">
+                            <div style="row-gap: 0; flex-direction: column;">
+                                <div class="formcolClass inputLabelDialog">
+                                    <label><span style="color:red">* </span>Model Name</label>
+                                </div>
+                                <div class="formcolClass inputDialog">
+                                    <div class="innerDiv">
+                                        <div style="flex:auto;max-width: 100%;">
+                                            <input class="form-control" [(ngModel)]="modelName" name="modelData"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span style="padding: 2px 2px;">After creation, you can register logged models as new versions.
+                                            <a style="text-decoration: none;" href="https://www.mlflow.org/docs/latest/model-registry.html">Learn More</a>
+                                        </span>
+                                    </div>
+                                    <div style="display: flex; justify-content: center; padding: .5rem .5rem;">
+                                        <div *ngIf="errorMsg.length > 0"><span>{{errorMsg}}</span></div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                          </form>
                           <div *ngIf="data.type == 'Delete'">
                             <span><strong>Experiment "{{data.data.name}}" (Experiment ID: {{data.data.experiment_id}}) will be deleted.</strong></span>
                           </div>
@@ -65,7 +88,7 @@
                             <span *ngIf="data.type == 'Edit'" (click)="rename()">Save</span>
                             <span *ngIf="data.type == 'Share'" (click)="share()">Share</span>
                             <span *ngIf="data.type == 'Delete'" (click)="deleteExp()">Delete</span>
-                            <span *ngIf="data.type == 'createExp'" (click)="createExp()">Delete</span>
+                            <span *ngIf="data.type == 'createExp' || data.type == 'createModel'" (click)="create()">Create</span>
                         </button>
                         </div>
                     </div>

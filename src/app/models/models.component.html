@@ -9,13 +9,13 @@
        <div class="alert alert-secondary" role="alert">
             <i class="fa fa-info-circle" style="padding: 0 .5rem;" aria-hidden="true"></i>
             Share and manage machine learning models. 
-            <a target="_blank" style="cursor: pointer;" href="https://www.mlflow.org/docs/latest/tracking.html">Learn more</a>
+            <a target="_blank" style="cursor: pointer;" href="https://www.mlflow.org/docs/latest/model-registry.html">Learn more</a>
             <div style="float: right; cursor: pointer;" ><span>X</span></div>
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
             <div style="gap: 8px; align-items: center;display:inline-flex">
                 <div>
-                    <button class="shareButton">Create Model</button>
+                    <button class="shareButton" (click)="onCreate()">Create Model</button>
                 </div>
             </div>
             <div style="display: flex;gap:8px">
@@ -35,11 +35,11 @@
             </div>
             
         </div>
-        <div>
-            <nz-table >
+        <div style="padding: 1rem 0;">
+            <nz-table [nzData]="tableData" >
                 <thead>
                   <tr>
-                    <th>Name</th>
+                    <th nzSort nzSortKey="name">Name</th>
                     <th>Latest Version</th>
                     <th>Staging</th>
                     <th>Production</th>
@@ -48,7 +48,18 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                  <tr *ngFor="let item of tableData">
+                    <td><a href="https://adminerp9g-server.ostack.babyrocket.net/#/models/{{item.name}}" target="_blank"> {{ item.name }}</a></td>
+                    <td>
+                        <a *ngIf="item.version != '-'; else innerBlock" href="https://adminerp9g-server.ostack.babyrocket.net/#/models/{{item.name}}/versions/{{item.version}}" target="_blank">Version: {{item.version}}</a>
+                        <ng-template #innerBlock>
+                            <span>-</span>
+                        </ng-template>
+                    </td>
+                    <td>{{ item.staging }}</td>
+                    <td>{{ item.production }}</td>
+                    <td>{{ item.lastModified }}</td>
+                    <td>{{ item.tags }}</td>
                   </tr>
                 </tbody>
             </nz-table>

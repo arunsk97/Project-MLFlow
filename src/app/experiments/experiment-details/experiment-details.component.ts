@@ -6,7 +6,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { AgGridAngular } from 'ag-grid-angular';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { ImageRendererComponent } from '../../image-renderer/image-renderer.component';
-import { CellClickedEvent, ColDef, GridReadyEvent, ColumnApi, GridOptions, GridApi } from 'ag-grid-community';
+import { ColDef, GridReadyEvent, ColumnApi, GridOptions, GridApi } from 'ag-grid-community';
 interface out {
   run_name: string;
   created: string;

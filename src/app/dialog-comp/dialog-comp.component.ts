@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ExperimentsService } from '../experiments/experiments.service';
+import { ModelsServiveService } from '../models/models-servive.service';
 import { Clipboard } from '@angular/cdk/clipboard';
 
 @Component({
@@ -16,9 +17,10 @@ export class DialogCompComponent {
     name: '',
     artifact_location: ''
   }
+  public modelName:string = '';
   public success:boolean = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>, private expSvc: ExperimentsService, private clipboard: Clipboard) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<any>, private expSvc: ExperimentsService, private clipboard: Clipboard, private modelSvc: ModelsServiveService) {}
 
   close(msg:any){
     this.dialogRef.close(msg);
@@ -60,10 +62,34 @@ export class DialogCompComponent {
     })
   }
 
-  createExp(){
-    let data: any = {
-      name: this.createData.name
+  create(){
+    if(this.data.type == 'createExp'){
+      let data: any = {
+        name: this.createData.name
+      }
+      if(this.createData.artifact_location.length > 0) data['artifact_location'] = this.createData.artifact_location;
+      this.expSvc.createExp(data).subscribe((res)=>{
+        this.close('success');
+      },(err)=>{
+        this.errorMsg = 'failed to create';
+        setTimeout(()=>{
+          this.errorMsg = ''
+        }, 3000);
+      })
+
+    }else{
+      let data:any={
+        "name": this.modelName
+      }
+      this.modelSvc.createModels(data).subscribe((res)=>{
+        this.close('success');
+      },(err)=>{
+        this.errorMsg = 'failed to create';
+        setTimeout(()=>{
+          this.errorMsg = ''
+        }, 3000);
+      })
     }
-    if(this.createData.artifact_location.length > 0) data['artifact_location'] = this.createData.artifact_location;
+    
   }
 }
